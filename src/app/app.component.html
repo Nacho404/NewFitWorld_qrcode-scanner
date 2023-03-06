@@ -1,5 +1,18 @@
-<div id="buttons-options">
-  <button class="entry-fitness-center">INTRARE</button>
-  <button class="exit-fitness-center">IEȘIRE</button>
+<div id="buttons-options" *ngIf="!anOptionIsSelected">
+  <button class="entry-fitness-center" (click)="onEntryClick()">INTRARE</button>
+  <button class="exit-fitness-center" (click)="onExitClick()">IEȘIRE</button>
 </div>
-<h1>QR-CODE scanner</h1>
+
+
+<div id="qrcode-scanner" [style]="anOptionIsSelected? 'display: flex' : 'display: none'">
+  <ngx-scanner-qrcode #action="scanner" (event)="onDataChange($event)"></ngx-scanner-qrcode>
+
+  <!-- Loading -->
+  <h1 class="camera-loading" *ngIf="action.isLoading">⌛ Loading...</h1>
+
+  <!-- toggleCamera -->
+  <button class="btn" [class.btn-info]="!action.isStart" [class.btn-warning]="action.isStart" [disabled]="action.isLoading">
+    <img *ngIf="!action.isStart" (click)="handle(action, 'start')" src="https://img.icons8.com/ios/50/000000/no-camera--v2.png" width="30px"/>
+    <img *ngIf="action.isStart" (click)="handle(action, 'stop')" src="https://img.icons8.com/ios/50/000000/no-camera--v1.png" width="30px"/>
+  </button>
+</div>

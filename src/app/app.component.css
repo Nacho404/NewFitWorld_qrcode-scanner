@@ -10,9 +10,10 @@ body, html {
 #buttons-options {
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
-    height: 60px;
-    border-bottom: 2px solid gray;
+    /* height: 60px; */
+    /* border-bottom: 2px solid gray; */
 }
 
 .entry-fitness-center, .exit-fitness-center {
@@ -21,9 +22,11 @@ body, html {
     background-color: #20a8d8;
     color: white;
     font-weight: bold;
-    width: 40vh;
-    height: 12vh;
+    font-size: 3rem;
+    width: 70vh;
+    height: 30vh;
     align-self: center;
+    margin: 60px
 }
 
 .entry-fitness-center:hover, .exit-fitness-center:hover {
@@ -31,4 +34,18 @@ body, html {
     cursor: pointer;
     color: black;
     font-weight: 900;
+}
+
+button img {
+    width: 70px;
+}
+
+#qrcode-scanner {
+    display: flex;
+    flex-direction: column;
+}
+
+.camera-loading {
+    display: flex;
+    justify-content: center;
 }

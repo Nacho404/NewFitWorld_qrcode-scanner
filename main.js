@@ -8,8 +8,8 @@ var serve = args.some((val) => val === '--serve');
 function createWindow () {
     //Create the browser window
     win = new BrowserWindow({
-        width: 800,
-        height: 500,
+        width: 1000,
+        height: 1000,
         autoHideMenuBar: true,
         resizable: false,
         show: false
