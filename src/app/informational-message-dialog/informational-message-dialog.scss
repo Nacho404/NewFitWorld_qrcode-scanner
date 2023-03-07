@@ -1,0 +1,43 @@
+$buttonColor: #20a8d8;
+$buttonBorderRadius: 0.4rem;
+$buttonHeight: 6vh;
+$buttonWidth: 19vh;
+$buttonBorderColor: #e4e5e7;
+
+.informational-message-dialog {
+    padding: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h4 {
+    text-align: center;
+    margin: 30px;
+    margin-top: 10px;
+    font-size: 2rem;
+}
+
+button {
+    border-radius: $buttonBorderRadius;
+    border: 2px solid $buttonBorderColor;
+    background-color: $buttonColor;
+    color: white;
+    font-weight: bold;
+    width: $buttonWidth;
+    height: $buttonHeight;
+    align-self: center;
+}
+
+button:hover {
+    border: 2px solid gray;
+    cursor: pointer;
+}
+
+.informational-message-dialog mat-icon {
+    width: 70px;
+    height: 80px;
+    font-size: 5rem;
+    padding: 10px;
+}

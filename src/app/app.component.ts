@@ -1,14 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
-import { NgxScannerQrcodeComponent, NgxScannerQrcodeService } from 'ngx-scanner-qrcode';
+import { MatDialog } from '@angular/material/dialog';
+import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
+import { InformationMessageDialog } from './informational-message-dialog/informational-message-dialog';
 import { VerifyQRCodeRequestData, VerifyQRCodeScope } from './qrcode.model';
 import { QRcodeService } from './qrcode.service';
+import { ResponseService } from './response.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'fitness-center-qrcode-scanner';
   @ViewChild("action", {static : true}) qrcodeComponent: NgxScannerQrcodeComponent | undefined;
   qrcodeData: any;
@@ -21,7 +24,7 @@ export class AppComponent {
 
   qrcodeRequestScope: VerifyQRCodeScope = VerifyQRCodeScope.Entry;
 
-  constructor (private qrcodeService: QRcodeService) {}
+  constructor (private qrcodeService: QRcodeService, private dialog: MatDialog, private responseService: ResponseService) {}
 
   onDataChange(event: any) {
     if(event[0]?.value && !this.qrcodeIsScanned) {
@@ -37,7 +40,7 @@ export class AppComponent {
       if(this.exitBtnIsClicked) { 
         this.qrcodeRequestScope = VerifyQRCodeScope.Exit;
       }
-      
+
       const qrcodeDataJSONformat = JSON.parse(this.qrcodeData);
 
       const requestData: VerifyQRCodeRequestData = {
@@ -47,14 +50,32 @@ export class AppComponent {
       }
 
       this.qrcodeService.verifyQRcodeScanned(requestData).subscribe({
-        next: (res) => {
-          this.resetBooleansDeclared();
+        next: () => {
+          let errorDisplayed = "";
+          if(this.qrcodeRequestScope == VerifyQRCodeScope.Entry){
+            errorDisplayed = "Cod QR scanat cu succes. Bine ai venit la NewFitWorld. Rămâi mereu în formă.";
+          }
+
+          if(this.qrcodeRequestScope == VerifyQRCodeScope.Exit){
+            errorDisplayed = "Cod QR scanat cu succes. Îți mulțumim că ai ales să te antrenezi alături de noi.";
+          }
+
+          const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: errorDisplayed, isSuccesfull: true}});
+
+          infoDialog.afterClosed().subscribe(() => {
+            this.resetBooleansDeclared();
+          })
         },
         error: (err) => {
-          this.resetBooleansDeclared();
+          const errorDisplayed = this.responseService.manageErrorResponse(err);
+          const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: errorDisplayed, isSuccesfull: false}});
+
+          infoDialog.afterClosed().subscribe(() => {
+            this.resetBooleansDeclared();
+          })
         }
       })
-      
+      this.resetBooleansDeclared();
     }
     this.qrcodeComponent?.stop();
   }

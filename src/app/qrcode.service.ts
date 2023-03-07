@@ -12,6 +12,6 @@ export class QRcodeService {
     configUrl = 'https://localhost:7154/QRCode';
 
     verifyQRcodeScanned(request: VerifyQRCodeRequestData) {
-        return this.http.post<null>(this.configUrl + `/verifyQRcodeScanned`, request);
+        return this.http.post(this.configUrl + `/verifyQRcodeScanned`, request);
     }
 }

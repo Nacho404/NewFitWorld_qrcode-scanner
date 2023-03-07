@@ -1,0 +1,8 @@
+<div class="informational-message-dialog">
+    <section>
+        <mat-icon *ngIf="!data.isSuccesfull" style="color: #eddb03">info</mat-icon>
+        <mat-icon *ngIf="data.isSuccesfull" style="color: green">check_circle</mat-icon>
+    </section>
+    <h4>{{this.data.message}}</h4>
+    <button (click)="onOK()">Ok</button>
+</div>
