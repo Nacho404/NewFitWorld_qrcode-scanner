@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgxScannerQrcodeComponent, NgxScannerQrcodeService } from 'ngx-scanner-qrcode';
+import { VerifyQRCodeRequestData, VerifyQRCodeScope } from './qrcode.model';
+import { QRcodeService } from './qrcode.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +16,45 @@ export class AppComponent {
   anOptionIsSelected: boolean = false;
   qrcodeIsScanned: boolean = false;
 
+  entryBtnIsClicked = false;
+  exitBtnIsClicked = false;
+
+  qrcodeRequestScope: VerifyQRCodeScope = VerifyQRCodeScope.Entry;
+
+  constructor (private qrcodeService: QRcodeService) {}
+
   onDataChange(event: any) {
     if(event[0]?.value && !this.qrcodeIsScanned) {
       this.qrcodeData = event[0].value;
 
       this.qrcodeComponent?.stop();
       this.qrcodeIsScanned = true;
+
+      if(this.entryBtnIsClicked) { 
+        this.qrcodeRequestScope = VerifyQRCodeScope.Entry;
+      }
+
+      if(this.exitBtnIsClicked) { 
+        this.qrcodeRequestScope = VerifyQRCodeScope.Exit;
+      }
+      
+      const qrcodeDataJSONformat = JSON.parse(this.qrcodeData);
+
+      const requestData: VerifyQRCodeRequestData = {
+        customerId: qrcodeDataJSONformat?.customerId,
+        locationIdentifyer: qrcodeDataJSONformat?.locationIdentifyer,
+        verifyQRCodeScope: this.qrcodeRequestScope
+      }
+
+      this.qrcodeService.verifyQRcodeScanned(requestData).subscribe({
+        next: (res) => {
+          this.resetBooleansDeclared();
+        },
+        error: (err) => {
+          this.resetBooleansDeclared();
+        }
+      })
+      
     }
     this.qrcodeComponent?.stop();
   }
@@ -30,11 +65,21 @@ export class AppComponent {
 
   onEntryClick() {
     this.anOptionIsSelected = true;
+    this.entryBtnIsClicked = true;
     this.qrcodeComponent?.start();
   }
 
   onExitClick() {
     this.anOptionIsSelected = true;
+    this.exitBtnIsClicked = true;
     this.qrcodeComponent?.start();
+  }
+
+  resetBooleansDeclared() {
+    this.qrcodeIsScanned = false;
+    this.anOptionIsSelected = false;
+    this.exitBtnIsClicked = false;
+    this.entryBtnIsClicked = false;
+
   }
 }

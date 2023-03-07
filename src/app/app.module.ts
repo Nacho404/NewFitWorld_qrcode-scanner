@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from "@angular/common/http";
+
 
 
 @NgModule({
@@ -10,7 +12,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    NgxScannerQrcodeModule
+    NgxScannerQrcodeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
