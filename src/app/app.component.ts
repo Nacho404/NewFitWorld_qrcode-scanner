@@ -21,6 +21,7 @@ export class AppComponent{
 
   entryBtnIsClicked = false;
   exitBtnIsClicked = false;
+  headerText = '';
 
   qrcodeRequestScope: VerifyQRCodeScope = VerifyQRCodeScope.Entry;
 
@@ -77,7 +78,11 @@ export class AppComponent{
       })
       this.resetBooleansDeclared();
     }
-    this.qrcodeComponent?.stop();
+    
+    // This approach is used for preventing an Infinite loop of scanning the QRcode
+    if(event.data){
+      this.qrcodeComponent?.stop();
+    }
   }
 
   public handle(action: any, fn: string): void {
@@ -85,22 +90,30 @@ export class AppComponent{
   }
 
   onEntryClick() {
+    this.headerText = 'Intrare în centrul fitness';
     this.anOptionIsSelected = true;
     this.entryBtnIsClicked = true;
     this.qrcodeComponent?.start();
   }
 
   onExitClick() {
+    this.headerText = 'Ieșire din centrul fitness';
     this.anOptionIsSelected = true;
     this.exitBtnIsClicked = true;
     this.qrcodeComponent?.start();
   }
 
   resetBooleansDeclared() {
+    this.headerText = '';
     this.qrcodeIsScanned = false;
     this.anOptionIsSelected = false;
     this.exitBtnIsClicked = false;
     this.entryBtnIsClicked = false;
 
+  }
+
+  backToMenu() {
+    this.qrcodeComponent?.stop();
+    this.resetBooleansDeclared();
   }
 }
