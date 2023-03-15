@@ -12,7 +12,8 @@ function createWindow () {
         height: 1000,
         autoHideMenuBar: true,
         resizable: false,
-        show: false
+        show: false,
+        icon: __dirname + '/src/assets/images/system-icon.png',
     })
 
     win.once('ready-to-show', () => {
