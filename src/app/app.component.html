@@ -1,4 +1,4 @@
-<div id="buttons-options" *ngIf="!anOptionIsSelected">
+<div id="buttons-options" *ngIf="!anOptionIsSelected && !configurationIsSelected">
   <button class="entry-fitness-center" (click)="onEntryClick()">INTRARE</button>
   <button class="exit-fitness-center" (click)="onExitClick()">IEȘIRE</button>
 </div>
@@ -19,4 +19,43 @@
     <img *ngIf="!action.isStart" (click)="handle(action, 'start')" src="https://img.icons8.com/ios/50/000000/no-camera--v2.png" width="30px"/>
     <img *ngIf="action.isStart" (click)="handle(action, 'stop')" src="https://img.icons8.com/ios/50/000000/no-camera--v1.png" width="30px"/>
   </button>
+</div>
+
+<div *ngIf="configurationIsSelected" class="configuration-container">
+  <h1 style="text-align: center;">Configurează locația</h1>
+
+  <form (ngSubmit)="onSubmit($event)">
+    <mat-form-field appearance="outline">
+      <mat-label>Selectează Orașul</mat-label>
+        <mat-select 
+        [value]="selectedCityName"
+        (selectionChange)="onCityChange($event)"
+        [formControl]="cityFormControl"
+      >
+        <mat-option *ngFor="let cityName of citiesList; async" [value]="cityName">{{cityName}}</mat-option>
+      </mat-select>
+  
+      <mat-error *ngIf="cityFormControl.hasError('required')">
+        *Selectarea Orașului este ebligatorie!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Selectează Locația</mat-label>
+        <mat-select 
+        [value]="selectedLocationIdentifyer"
+        (selectionChange)="onLocationChange($event)"
+        [formControl]="locationFormControl"
+      >
+        <mat-option *ngFor="let locationIdentifyer of locationsList; async" [value]="locationIdentifyer">{{locationIdentifyer}}</mat-option>
+      </mat-select>
+  
+      <mat-error *ngIf="locationFormControl.hasError('required')">
+        *Selectarea Locației este ebligatorie!
+      </mat-error>
+    </mat-form-field>
+    
+    <button class="submit-button" type="submit">Configurează Scanner-ul</button>
+  </form>
+
 </div>

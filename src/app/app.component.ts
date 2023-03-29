@@ -5,6 +5,7 @@ import { InformationMessageDialog } from './informational-message-dialog/informa
 import { VerifyQRCodeRequestData, VerifyQRCodeScope } from './qrcode.model';
 import { QRcodeService } from './qrcode.service';
 import { ResponseService } from './response.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +19,21 @@ export class AppComponent{
 
   anOptionIsSelected: boolean = false;
   qrcodeIsScanned: boolean = false;
+  configurationIsSelected: boolean = true;
 
   entryBtnIsClicked = false;
   exitBtnIsClicked = false;
   headerText = '';
 
+  selectedLocationIdentifyer: string | null = null;
+  selectedCityName: string | null = null;
+
+  locationsList: string[] = [];
+  citiesList: string[] = [];
+
+  locationFormControl = new FormControl(this.selectedLocationIdentifyer, [Validators.required]);
+  cityFormControl = new FormControl(this.selectedCityName, [Validators.required]);
+  
   qrcodeRequestScope: VerifyQRCodeScope = VerifyQRCodeScope.Entry;
 
   constructor (private qrcodeService: QRcodeService, private dialog: MatDialog, private responseService: ResponseService) {}
@@ -115,5 +126,20 @@ export class AppComponent{
   backToMenu() {
     this.qrcodeComponent?.stop();
     this.resetBooleansDeclared();
+  }
+
+  // Logic of configuration
+
+  onLocationChange(event: any) {
+    this.selectedLocationIdentifyer = event.value;
+  }
+  
+  onCityChange(event: any) {
+    this.selectedCityName = event.value;
+    this.selectedLocationIdentifyer = null;
+  }
+
+  onSubmit(event: any) {
+    
   }
 }
