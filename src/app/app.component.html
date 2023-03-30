@@ -1,3 +1,8 @@
+<div *ngIf="!anOptionIsSelected && !configurationIsSelected" id="app-header">
+  <h2>Locația: {{selectedLocationIdentifyer}}</h2>
+  <button class="back-btn" (click)="reconfigureScanner()">Reconfigurează</button>
+</div>
+
 <div id="buttons-options" *ngIf="!anOptionIsSelected && !configurationIsSelected">
   <button class="entry-fitness-center" (click)="onEntryClick()">INTRARE</button>
   <button class="exit-fitness-center" (click)="onExitClick()">IEȘIRE</button>

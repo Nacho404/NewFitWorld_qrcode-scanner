@@ -61,6 +61,14 @@ export class AppComponent implements OnInit{
 
       const qrcodeDataJSONformat = JSON.parse(this.qrcodeData);
 
+      if(qrcodeDataJSONformat?.locationIdentifyer != this.selectedLocationIdentifyer) {
+        const errorDisplayed = `QR-code-ul scanat aparține de locația ${qrcodeDataJSONformat?.locationIdentifyer}, iar locația în care vă aflați este ${this.selectedLocationIdentifyer}. Este perims accesul în sală doar cliențiilor înregistrați pe locația: ${qrcodeDataJSONformat?.locationIdentifyer}`
+        this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: errorDisplayed, isSuccesfull: false}});
+        return;
+      }
+
+      console.log('S-a continuat')
+
       const requestData: VerifyQRCodeRequestData = {
         customerId: qrcodeDataJSONformat?.customerId,
         locationIdentifyer: qrcodeDataJSONformat?.locationIdentifyer,
@@ -147,7 +155,15 @@ export class AppComponent implements OnInit{
   }
 
   onSubmit(event: any) {
+    if(!this.locationFormControl.valid || !this.cityFormControl.valid){
+      return;
+    }
     
+    this.configurationIsSelected = false;
+  }
+
+  reconfigureScanner() {
+    this.configurationIsSelected = true;
   }
 
   getCitiesNames() {
