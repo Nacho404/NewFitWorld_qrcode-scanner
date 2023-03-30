@@ -14,4 +14,12 @@ export class QRcodeService {
     verifyQRcodeScanned(request: VerifyQRCodeRequestData) {
         return this.http.post(this.configUrl + `/verifyQRcodeScanned`, request);
     }
+
+    getAllCities() {
+        return this.http.get<string[]>(this.configUrl  + '/getCitiesNamesForQRcodeConfiguration');
+    }
+
+    getAllLocations(cityName: string | null) {
+        return this.http.get<string[]>(this.configUrl + `/getLocationsIdentifyersForQRcodeConfiguration/${cityName}`);
+    }
 }

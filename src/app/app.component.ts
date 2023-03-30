@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
 import { InformationMessageDialog } from './informational-message-dialog/informational-message-dialog';
@@ -6,13 +6,15 @@ import { VerifyQRCodeRequestData, VerifyQRCodeScope } from './qrcode.model';
 import { QRcodeService } from './qrcode.service';
 import { ResponseService } from './response.service';
 import { FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent implements OnInit{
+  subscriptionRxjs: Subscription = new Subscription;
   title = 'fitness-center-qrcode-scanner';
   @ViewChild("action", {static : true}) qrcodeComponent: NgxScannerQrcodeComponent | undefined;
   qrcodeData: any;
@@ -37,6 +39,10 @@ export class AppComponent{
   qrcodeRequestScope: VerifyQRCodeScope = VerifyQRCodeScope.Entry;
 
   constructor (private qrcodeService: QRcodeService, private dialog: MatDialog, private responseService: ResponseService) {}
+
+  ngOnInit(): void {
+    this.getCitiesNames();
+  }
 
   onDataChange(event: any) {
     if(event[0]?.value && !this.qrcodeIsScanned) {
@@ -137,9 +143,26 @@ export class AppComponent{
   onCityChange(event: any) {
     this.selectedCityName = event.value;
     this.selectedLocationIdentifyer = null;
+    this.getLocationsIdentifyers()
   }
 
   onSubmit(event: any) {
     
+  }
+
+  getCitiesNames() {
+    if(this.subscriptionRxjs) {
+      this.subscriptionRxjs.unsubscribe();
+    }
+
+    this.subscriptionRxjs = this.qrcodeService.getAllCities().subscribe(resp => this.citiesList = resp);
+  }
+
+  getLocationsIdentifyers() {
+    if(this.subscriptionRxjs) {
+      this.subscriptionRxjs.unsubscribe();
+    }
+
+    this.subscriptionRxjs = this.qrcodeService.getAllLocations(this.selectedCityName).subscribe(resp => this.locationsList = resp);
   }
 }

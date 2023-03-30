@@ -28,6 +28,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Selectează Orașul</mat-label>
         <mat-select 
+        [disableOptionCentering]="true"
         [value]="selectedCityName"
         (selectionChange)="onCityChange($event)"
         [formControl]="cityFormControl"
@@ -43,6 +44,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Selectează Locația</mat-label>
         <mat-select 
+        [disableOptionCentering]="true"
         [value]="selectedLocationIdentifyer"
         (selectionChange)="onLocationChange($event)"
         [formControl]="locationFormControl"
