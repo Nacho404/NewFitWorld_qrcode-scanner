@@ -67,8 +67,6 @@ export class AppComponent implements OnInit{
         return;
       }
 
-      console.log('S-a continuat')
-
       const requestData: VerifyQRCodeRequestData = {
         customerId: qrcodeDataJSONformat?.customerId,
         locationIdentifyer: qrcodeDataJSONformat?.locationIdentifyer,
