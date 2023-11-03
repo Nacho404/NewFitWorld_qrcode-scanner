@@ -18,4 +18,5 @@ export class AppComponentService {
 
 export enum UrlTargetTypes {
     QRCODE = '/QRCode',
+    USER = '/User'
 }

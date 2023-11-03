@@ -1,0 +1,38 @@
+<mat-progress-bar mode="indeterminate" *ngIf="requestIsInProgress"></mat-progress-bar>
+<div id="sign-in-formular" [ngClass]="requestIsInProgress? 'request-is-in-progress' : 'request-is-not-in-progress'">
+    <h1>Conectează-te</h1>
+    <form class="formular" (ngSubmit)="onSubmit($event)">
+
+        <mat-form-field id="input-field" class="input-form-sing-in" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input 
+                matInput
+                type="email" 
+                name="email" 
+                placeholder="Ex. pat@example.com"
+                [formControl]="emailFormControl"
+            >
+
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+                *Email-ul este <strong>obligatoriu</strong>!
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field id="input-field" class="input-form-sing-in" appearance="outline">
+            <mat-label>Parola</mat-label>
+            <input 
+                matInput 
+                type="password"
+                name="password"
+                [formControl]="passwordFormControl"
+            >
+
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+                *Parola este <strong>obligatorie</strong>!
+            </mat-error>
+        </mat-form-field>
+
+        <button class="submit-button" type="submit" [disabled]="requestIsInProgress? true : false">Conectare</button>
+
+    </form>
+</div>

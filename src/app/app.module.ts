@@ -13,13 +13,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { QrCodeComponent } from './components/qr-code-component/qr-code-component';
 import { Interceptor } from './services/interceptor';
+import { SignInComponent } from './components/sign-in/sign-in-component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     InformationMessageDialog,
-    QrCodeComponent
+    QrCodeComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

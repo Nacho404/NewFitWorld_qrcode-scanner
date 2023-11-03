@@ -1,0 +1,61 @@
+$buttonColor: #20a8d8;
+$buttonBorderRadius: 0.4rem;
+$buttonHeight: 7vh;
+$buttonWidth: 20vh;
+$buttonBorderColor: #e4e5e7;
+
+#sign-in-formular form {
+    display: flex;
+    flex-flow: column;
+    width: 400px;
+}
+
+#sign-in-formular form .input-form-sign-in {
+    margin-bottom: 20px;
+}
+
+#sign-in-formular form .submit-button {
+    border-radius: $buttonBorderRadius;
+    border: 2px solid $buttonBorderColor;
+    background-color: $buttonColor;
+    color: white;
+    font-weight: bold;
+    width: $buttonWidth;
+    height: $buttonHeight;
+    align-self: center;
+    margin-top: 20px;
+}
+
+#sign-in-formular form .submit-button:hover {
+    border: 2px solid gray;
+}
+
+#sign-in-formular h1 {
+    margin-bottom: 40px;
+}
+
+#sign-in-formular {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 0.6rem;
+    border: 1px solid lightgray;
+    padding: 30px;
+}
+
+#sign-in-formular .hide-password-button {
+    background-color: white;
+    border: 0px;
+}
+
+.request-is-in-progress {
+    background-color: lightgray !important;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+.request-is-not-in-progress {
+    background-color: white;
+    border-radius: 0.6rem;
+}

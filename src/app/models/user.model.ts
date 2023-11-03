@@ -5,3 +5,23 @@ export interface UserDataToken {
     email: string;
     role: string;
 }
+
+export interface AccountCredetialsModel {
+    email: string,
+    password: string 
+}
+
+export interface SignInRequestResponse
+{
+    token: any,
+    failed: boolean,
+    errorMessage: string,
+    successMessage: string
+}
+
+export interface LogOutRequestResponse
+{
+    failed: boolean,
+    errorMessage: string,
+    successMessage: string
+}
