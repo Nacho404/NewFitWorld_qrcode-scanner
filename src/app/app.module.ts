@@ -14,6 +14,10 @@ import {MatInputModule} from '@angular/material/input';
 import { QrCodeComponent } from './components/qr-code-component/qr-code-component';
 import { Interceptor } from './services/interceptor';
 import { SignInComponent } from './components/sign-in/sign-in-component';
+import { RouterModule } from '@angular/router';
+import { NotAuthGuardService } from './services/not-auth-guard.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -25,6 +29,11 @@ import { SignInComponent } from './components/sign-in/sign-in-component';
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([
+      { path: '', component: QrCodeComponent, canActivate: [NotAuthGuardService] },
+      { path: 'qrcode', component: QrCodeComponent, canActivate: [NotAuthGuardService] },
+      { path: 'signin', component: SignInComponent, canActivate: [AuthGuardService] }
+    ]),
     NgxScannerQrcodeModule,
     HttpClientModule,
     MatDialogModule,
@@ -34,10 +43,11 @@ import { SignInComponent } from './components/sign-in/sign-in-component';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }, AuthGuardService, NotAuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

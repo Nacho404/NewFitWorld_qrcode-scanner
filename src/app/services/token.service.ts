@@ -36,6 +36,7 @@ export class TokenService {
             this.cookieService.set('token', '')
         }
 
+        console.log(tokenExpired? false : true);
         return tokenExpired? false : true;
     };
     
@@ -60,10 +61,12 @@ export class TokenService {
   
     updateUserIdFromStore(userId: any) {
       this.cookieService.set('userId', userId);
+      this.subject.next();
     }
   
     eraseUserIdFromStore() {
       this.cookieService.set('userId', '');
+      this.subject.next();
     }
   
     getLocationIdFromStore() {
@@ -76,14 +79,17 @@ export class TokenService {
   
     eraseLocationIdFromStore() {
       this.cookieService.set('locationId', '');
+      this.subject.next();
     }
   
     updateTokenFromStore(tokenValue: any) {
       this.cookieService.set('token', tokenValue);
+      this.subject.next();
     }
   
     eraseTokenFromStore() {
       this.cookieService.set('token', '');
+      this.subject.next();
     }
   
     getTokenValue() {
