@@ -6,9 +6,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { TokenService } from "src/app/services/token.service";
 import { UserService } from "src/app/services/user.service";
 import { InformationMessageDialog } from "../informational-message-dialog/informational-message-dialog";
-import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
-import { isDevMode } from '@angular/core';
 import { LogOutRequestResponse, UserDataToken } from "src/app/models/user.model";
 
 @Component({

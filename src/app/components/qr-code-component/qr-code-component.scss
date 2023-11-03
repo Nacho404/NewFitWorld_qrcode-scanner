@@ -1,8 +1,11 @@
+$buttonBorderColor: #e4e5e7;
+$buttonBorderRadius: 0.4rem;
+
 #buttons-options {
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     /* height: 60px; */
     /* border-bottom: 2px solid gray; */
 }
@@ -15,9 +18,9 @@
     font-weight: bold;
     font-size: 3rem;
     width: 70vh;
-    height: 30vh;
+    height: 20vh;
     align-self: center;
-    margin: 60px
+    margin: 5vh
 }
 
 .entry-fitness-center:hover, .exit-fitness-center:hover {
@@ -87,8 +90,8 @@ mat-icon {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    height: 80vh;
+    justify-content: space-evenly;
+    height: 75vh;
 }
 
 .configuration-container form mat-form-field {
@@ -101,8 +104,22 @@ mat-icon {
     background-color: #20a8d8;
     color: white;
     font-weight: bold;
-    font-size: 2rem;
-    width: 30vh;
+    font-size: 3vh;
+    width: 40vh;
     height: 10vh;
     align-self: center;
+}
+
+#qrcode-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: $buttonBorderRadius;
+    border: 2px solid $buttonBorderColor;
+    width: 90vh;
+    height: 85vh;
+    background-color: white;
+    margin: auto;
+    margin-top: 3vh;
+    padding: 3vh;
 }

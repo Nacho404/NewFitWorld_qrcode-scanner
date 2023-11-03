@@ -18,6 +18,8 @@ import { NotAuthGuardService } from './services/not-auth-guard.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { HeaderComponent } from './components/header/header';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
     AppComponent,
     InformationMessageDialog,
     QrCodeComponent,
-    SignInComponent
+    SignInComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
     FormsModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }, AuthGuardService, NotAuthGuardService],

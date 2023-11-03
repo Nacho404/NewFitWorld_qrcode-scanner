@@ -32,6 +32,7 @@ $buttonBorderColor: #e4e5e7;
 
 #sign-in-formular h1 {
     margin-bottom: 40px;
+    margin-top: 30px;
 }
 
 #sign-in-formular {
@@ -41,7 +42,8 @@ $buttonBorderColor: #e4e5e7;
     background-color: white;
     border-radius: 0.6rem;
     border: 1px solid lightgray;
-    padding: 30px;
+    padding: 0 0 30px 0;
+    margin: 10vh;
 }
 
 #sign-in-formular .hide-password-button {

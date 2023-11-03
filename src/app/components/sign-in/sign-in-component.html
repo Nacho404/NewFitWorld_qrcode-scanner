@@ -1,5 +1,5 @@
-<mat-progress-bar mode="indeterminate" *ngIf="requestIsInProgress"></mat-progress-bar>
 <div id="sign-in-formular" [ngClass]="requestIsInProgress? 'request-is-in-progress' : 'request-is-not-in-progress'">
+    <mat-progress-bar mode="indeterminate" *ngIf="requestIsInProgress"></mat-progress-bar>
     <h1>Conectează-te</h1>
     <form class="formular" (ngSubmit)="onSubmit($event)">
 

@@ -1,4 +1,6 @@
-<div *ngIf="!anOptionIsSelected && !configurationIsSelected" id="app-header">
+<header></header>
+<div id="qrcode-container">
+  <div *ngIf="!anOptionIsSelected && !configurationIsSelected" id="app-header">
     <h2>Locația: {{selectedLocationIdentifyer}}</h2>
     <button class="back-btn" (click)="reconfigureScanner()">Reconfigurează</button>
   </div>
@@ -66,4 +68,6 @@
     </form>
   
   </div>
+</div>
+
   
