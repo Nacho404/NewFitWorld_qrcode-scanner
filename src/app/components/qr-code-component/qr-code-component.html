@@ -1,0 +1,69 @@
+<div *ngIf="!anOptionIsSelected && !configurationIsSelected" id="app-header">
+    <h2>Locația: {{selectedLocationIdentifyer}}</h2>
+    <button class="back-btn" (click)="reconfigureScanner()">Reconfigurează</button>
+  </div>
+  
+  <div id="buttons-options" *ngIf="!anOptionIsSelected && !configurationIsSelected">
+    <button class="entry-fitness-center" (click)="onEntryClick()">INTRARE</button>
+    <button class="exit-fitness-center" (click)="onExitClick()">IEȘIRE</button>
+  </div>
+  
+  <div *ngIf="anOptionIsSelected" id="app-header">
+    <h2>Mod: {{headerText}}</h2>
+    <button class="back-btn" (click)="backToMenu()">Înapoi la meniu</button>
+  </div>
+  
+  <div id="qrcode-scanner" [style]="anOptionIsSelected? 'display: flex' : 'display: none'">
+    <ngx-scanner-qrcode #action="scanner" (event)="onDataChange($event)"></ngx-scanner-qrcode>
+  
+    <!-- Loading -->
+    <h1 class="camera-loading" *ngIf="action.isLoading"><mat-icon>hourglass_empty</mat-icon> Se încarcă...</h1>
+  
+    <!-- toggleCamera -->
+    <button *ngIf="!action.isLoading" class="btn" [class.btn-info]="!action.isStart" [class.btn-warning]="action.isStart" [disabled]="action.isLoading">
+      <img *ngIf="!action.isStart" (click)="handle(action, 'start')" src="https://img.icons8.com/ios/50/000000/no-camera--v2.png" width="30px"/>
+      <img *ngIf="action.isStart" (click)="handle(action, 'stop')" src="https://img.icons8.com/ios/50/000000/no-camera--v1.png" width="30px"/>
+    </button>
+  </div>
+  
+  <div *ngIf="configurationIsSelected" class="configuration-container">
+    <h1 style="text-align: center;">Configurează locația</h1>
+  
+    <form (ngSubmit)="onSubmit($event)">
+      <mat-form-field appearance="outline">
+        <mat-label>Selectează Orașul</mat-label>
+          <mat-select 
+          [disableOptionCentering]="true"
+          [value]="selectedCityName"
+          (selectionChange)="onCityChange($event)"
+          [formControl]="cityFormControl"
+        >
+          <mat-option *ngFor="let cityName of citiesList; async" [value]="cityName">{{cityName}}</mat-option>
+        </mat-select>
+    
+        <mat-error *ngIf="cityFormControl.hasError('required')">
+          *Selectarea Orașului este ebligatorie!
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Selectează Locația</mat-label>
+          <mat-select 
+          [disableOptionCentering]="true"
+          [value]="selectedLocationIdentifyer"
+          (selectionChange)="onLocationChange($event)"
+          [formControl]="locationFormControl"
+        >
+          <mat-option *ngFor="let locationIdentifyer of locationsList; async" [value]="locationIdentifyer">{{locationIdentifyer}}</mat-option>
+        </mat-select>
+    
+        <mat-error *ngIf="locationFormControl.hasError('required')">
+          *Selectarea Locației este ebligatorie!
+        </mat-error>
+      </mat-form-field>
+      
+      <button class="submit-button" type="submit">Configurează Scanner-ul</button>
+    </form>
+  
+  </div>
+  

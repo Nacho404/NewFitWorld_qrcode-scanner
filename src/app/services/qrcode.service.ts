@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { VerifyQRCodeRequestData } from "./qrcode.model";
+import { VerifyQRCodeRequestData } from "../models/qrcode.model";
 
 @Injectable({
     providedIn: 'root'

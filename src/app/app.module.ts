@@ -6,17 +6,19 @@ import { HttpClientModule } from "@angular/common/http";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InformationMessageDialog } from './informational-message-dialog/informational-message-dialog';
+import { InformationMessageDialog } from './components/informational-message-dialog/informational-message-dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { QrCodeComponent } from './components/qr-code-component/qr-code-component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    InformationMessageDialog
+    InformationMessageDialog,
+    QrCodeComponent
   ],
   imports: [
     BrowserModule,
