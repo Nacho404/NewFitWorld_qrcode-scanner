@@ -2,7 +2,6 @@
     <div id="system-logo">
         <img src="././././assets/images/system-logo.jpeg" alt="Logo">
     </div>
-    <h4 *ngIf="userIsLoggedIn && locationAssignedToUser != null">Locație: {{locationAssignedToUser.identifyer}}</h4>
     
     <div *ngIf="userIsLoggedIn" id="account-panel" class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="align-self: center;">
@@ -12,7 +11,8 @@
             </section>
         </button>
         <ul class="dropdown-menu dropdown-menu-dark ">
-            <li><a class="dropdown-item bg-secondary">Rol: {{userDataToken.role}}</a></li>
+            <li><a class="dropdown-item">Rol: {{userDataToken.role}}</a></li>
+            <li><a class="dropdown-item">Locație: {{locationIdentifyer}}</a></li>
              <li>
                 <a class="dropdown-item" (click)="signOut()" style="display: inline-flex;">
                     <mat-icon id="nav-icon" fontIcon="exit_to_app" style="margin-right: 10px;"></mat-icon>

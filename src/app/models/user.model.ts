@@ -14,6 +14,7 @@ export interface AccountCredetialsModel {
 export interface SignInRequestResponse
 {
     token: any,
+    locationIdentifyer: string,
     failed: boolean,
     errorMessage: string,
     successMessage: string

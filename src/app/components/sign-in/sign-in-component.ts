@@ -4,7 +4,6 @@ import { ErrorStateMatcher } from "@angular/material/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
-import { ResponseService } from "src/app/services/response.service";
 import { TokenService } from "src/app/services/token.service";
 import { UserService } from "src/app/services/user.service";
 import { InformationMessageDialog } from "../informational-message-dialog/informational-message-dialog";
@@ -34,7 +33,6 @@ export class SignInComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router,
     private tokenService: TokenService,
-    private responseService: ResponseService,
     private dialog: MatDialog
     ){}
 
@@ -67,6 +65,7 @@ export class SignInComponent implements OnInit {
         
         this.tokenService.updateTokenFromStore(res.token.value);
         this.tokenService.updateUserIdFromStore(res.token.userId);
+        this.tokenService.updateLocationIdentifyerFromStore(res.locationIdentifyer);
         this.router.navigate(['/']);
         this.requestIsInProgress = false;
       },

@@ -21,8 +21,7 @@ export class HeaderComponent implements OnInit {
   userId: string = '';
   accountRole: string = '';
   userDataToken: UserDataToken;
-  locationAssignedToUser: any | null = null; // Here should be LocationModel
-
+  locationIdentifyer: string | null;
   tokenValue: string;
 
   constructor(
@@ -40,7 +39,7 @@ export class HeaderComponent implements OnInit {
     this.setUserIsLoggedIn()
     this.userId = this.tokenService.getUserIdFromStore();
     if(this.userIsLoggedIn) {
-      this.getUserLocationAssigned();
+      this.locationIdentifyer = this.tokenService.getLocationIdentifyerFromStore();
     }
     
     this.tokenService.subject.subscribe(() => {
@@ -49,7 +48,7 @@ export class HeaderComponent implements OnInit {
       this.userId = this.tokenService.getUserIdFromStore();
 
       if(this.userIsLoggedIn) {
-        this.getUserLocationAssigned();
+        this.locationIdentifyer = this.tokenService.getLocationIdentifyerFromStore();
       }
 
     });
@@ -61,26 +60,6 @@ export class HeaderComponent implements OnInit {
 
   setUserIsLoggedIn() {
     this.userIsLoggedIn = this.tokenService.userIsLoggedIn();
-  }
-
-  getUserLocationAssigned() {
-    // if(this.userId != '') {
-      
-    //   this.userService.getDataFromUser(this.userId).subscribe({
-    //     next: (res: GetDataFromUserRequestResponse) => {
-
-    //       if(res.failed){
-    //         this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: res.errorMessage}});
-    //       }
-  
-    //       this.locationAssignedToUser = res.userLocationAssigned;
-    //       this.tokenService.updateLocationIdFromStore(res.userLocationAssigned?.id);
-    //     },
-    //     error: (err: string) => {
-    //       this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: err}});
-    //     }
-    //   });
-    // }
   }
 
   signOut() {
@@ -100,9 +79,9 @@ export class HeaderComponent implements OnInit {
         
         this.tokenService.eraseTokenFromStore();
         this.tokenService.eraseUserIdFromStore();
-        this.tokenService.eraseLocationIdFromStore();
+        this.tokenService.eraseLocationIdentifyerFromStore();
         this.router.navigate(['/', 'signin']);
-        this.locationAssignedToUser = null;
+        this.locationIdentifyer = null;
       },
       error: (err: string) => {
         this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: err}});

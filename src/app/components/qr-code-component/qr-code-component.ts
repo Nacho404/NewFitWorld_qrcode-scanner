@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
-import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { VerifyQRCodeScope, VerifyQRCodeRequestData } from 'src/app/models/qrcode.model';
 import { QRcodeService } from 'src/app/services/qrcode.service';
 import { ResponseService } from 'src/app/services/response.service';
 import { InformationMessageDialog } from '../informational-message-dialog/informational-message-dialog';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'qr-code-component',
@@ -15,33 +15,30 @@ import { InformationMessageDialog } from '../informational-message-dialog/inform
 })
 export class QrCodeComponent implements OnInit{
   subscriptionRxjs: Subscription = new Subscription;
-  title = 'fitness-center-qrcode-scanner';
   @ViewChild("action", {static : true}) qrcodeComponent: NgxScannerQrcodeComponent | undefined;
   qrcodeData: any;
 
   anOptionIsSelected: boolean = false;
   qrcodeIsScanned: boolean = false;
-  configurationIsSelected: boolean = true;
 
   entryBtnIsClicked = false;
   exitBtnIsClicked = false;
   headerText = '';
 
-  selectedLocationIdentifyer: string | null = null;
-  selectedCityName: string | null = null;
+  locationIdentifyer: string;
 
   locationsList: string[] = [];
   citiesList: string[] = [];
 
-  locationFormControl = new FormControl(this.selectedLocationIdentifyer, [Validators.required]);
-  cityFormControl = new FormControl(this.selectedCityName, [Validators.required]);
-  
   qrcodeRequestScope: VerifyQRCodeScope = VerifyQRCodeScope.Entry;
 
-  constructor (private qrcodeService: QRcodeService, private dialog: MatDialog, private responseService: ResponseService) {}
+  constructor (private qrcodeService: QRcodeService, 
+    private dialog: MatDialog, 
+    private responseService: ResponseService,
+    private tokenService: TokenService) {}
 
   ngOnInit(): void {
-    this.getCitiesNames();
+    this.locationIdentifyer = this.tokenService.getLocationIdentifyerFromStore();
   }
 
   onDataChange(event: any) {
@@ -61,8 +58,8 @@ export class QrCodeComponent implements OnInit{
 
       const qrcodeDataJSONformat = JSON.parse(this.qrcodeData);
 
-      if(qrcodeDataJSONformat?.locationIdentifyer != this.selectedLocationIdentifyer) {
-        const errorDisplayed = `QR-code-ul scanat aparține de locația ${qrcodeDataJSONformat?.locationIdentifyer}, iar locația în care vă aflați este ${this.selectedLocationIdentifyer}. Este perims accesul în sală doar cliențiilor înregistrați pe locația: ${qrcodeDataJSONformat?.locationIdentifyer}`
+      if(qrcodeDataJSONformat?.locationIdentifyer != this.locationIdentifyer) {
+        const errorDisplayed = `QR-code-ul scanat aparține de locația ${qrcodeDataJSONformat?.locationIdentifyer}, iar locația în care vă aflați este ${this.locationIdentifyer}. Este perims accesul în sală doar cliențiilor înregistrați pe locația: ${qrcodeDataJSONformat?.locationIdentifyer}`
         this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: errorDisplayed, isSuccesfull: false}});
         return;
       }
@@ -132,51 +129,10 @@ export class QrCodeComponent implements OnInit{
     this.anOptionIsSelected = false;
     this.exitBtnIsClicked = false;
     this.entryBtnIsClicked = false;
-
   }
 
   backToMenu() {
     this.qrcodeComponent?.stop();
     this.resetBooleansDeclared();
-  }
-
-  // Logic of configuration
-
-  onLocationChange(event: any) {
-    this.selectedLocationIdentifyer = event.value;
-  }
-  
-  onCityChange(event: any) {
-    this.selectedCityName = event.value;
-    this.selectedLocationIdentifyer = null;
-    this.getLocationsIdentifyers()
-  }
-
-  onSubmit(event: any) {
-    if(!this.locationFormControl.valid || !this.cityFormControl.valid){
-      return;
-    }
-    
-    this.configurationIsSelected = false;
-  }
-
-  reconfigureScanner() {
-    this.configurationIsSelected = true;
-  }
-
-  getCitiesNames() {
-    if(this.subscriptionRxjs) {
-      this.subscriptionRxjs.unsubscribe();
-    }
-
-    this.subscriptionRxjs = this.qrcodeService.getAllCities().subscribe(resp => this.citiesList = resp);
-  }
-
-  getLocationsIdentifyers() {
-    if(this.subscriptionRxjs) {
-      this.subscriptionRxjs.unsubscribe();
-    }
-
-    this.subscriptionRxjs = this.qrcodeService.getAllLocations(this.selectedCityName).subscribe(resp => this.locationsList = resp);
   }
 }

@@ -25,34 +25,32 @@ export class TokenService {
     }
     
     constructor (private cookieService: CookieService) {
-        this.tokenValue = this.cookieService.get('token');
+      this.tokenValue = this.cookieService.get('token');
     }
   
   
     userIsLoggedIn = () => {
-        const tokenExpired = this.helper.isTokenExpired(this.cookieService.get('token'));
+      const tokenExpired = this.helper.isTokenExpired(this.cookieService.get('token'));
 
-        if(tokenExpired){
-            this.cookieService.set('token', '')
-        }
+      if(tokenExpired){
+        this.cookieService.set('token', '')
+      }
 
-        console.log(tokenExpired? false : true);
-        return tokenExpired? false : true;
+      return tokenExpired? false : true;
     };
     
     getUserData() {
-        const decodedToken = this.helper.decodeToken(this.cookieService.get('token'));
+      const decodedToken = this.helper.decodeToken(this.cookieService.get('token'));
 
-
-        if(decodedToken != null) {
-            this.userDataToken.userId = decodedToken.nameId;
-            this.userDataToken.firstName = decodedToken.given_name;
-            this.userDataToken.lastName = decodedToken.family_name;
-            this.userDataToken.email = decodedToken.email;
-            this.userDataToken.role = decodedToken.role;
-        }
-        
-        return this.userDataToken;
+      if(decodedToken != null) {
+        this.userDataToken.userId = decodedToken.nameId;
+        this.userDataToken.firstName = decodedToken.given_name;
+        this.userDataToken.lastName = decodedToken.family_name;
+        this.userDataToken.email = decodedToken.email;
+        this.userDataToken.role = decodedToken.role;
+      }
+      
+      return this.userDataToken;
     }
 
     getUserIdFromStore() {
@@ -69,16 +67,16 @@ export class TokenService {
       this.subject.next();
     }
   
-    getLocationIdFromStore() {
-      return this.cookieService.get('locationId');
+    getLocationIdentifyerFromStore() {
+      return this.cookieService.get('locationIdentifyer');
     }
   
-    updateLocationIdFromStore(locationId: any) {
-      this.cookieService.set('locationId', locationId);
+    updateLocationIdentifyerFromStore(identifyer: any) {
+      this.cookieService.set('locationIdentifyer', identifyer);
     }
   
-    eraseLocationIdFromStore() {
-      this.cookieService.set('locationId', '');
+    eraseLocationIdentifyerFromStore() {
+      this.cookieService.set('locationIdentifyer', '');
       this.subject.next();
     }
   
@@ -93,6 +91,6 @@ export class TokenService {
     }
   
     getTokenValue() {
-        return this.cookieService.get('token');
+      return this.cookieService.get('token');
     }
 }
