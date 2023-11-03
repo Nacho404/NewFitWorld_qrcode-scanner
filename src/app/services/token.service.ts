@@ -2,6 +2,11 @@ import { Subject } from "rxjs";
 import { UserDataToken } from "../models/user.model";
 import { CookieService } from "ngx-cookie-service";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Injectable } from "@angular/core";
+
+@Injectable({
+    providedIn: 'root'
+})
 
 export class TokenService {
     tokenValue: string = '';
