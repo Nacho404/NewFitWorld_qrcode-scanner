@@ -1,25 +1,31 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { VerifyQRCodeRequestData } from "../models/qrcode.model";
+import { AppComponentService, UrlTargetTypes } from "./app.component.service";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class QRcodeService {
-    constructor (private http:  HttpClient) {}
-
-    configUrl = 'https://localhost:7154/QRCode';
+    constructor (private http:  HttpClient, private appComponentService: AppComponentService) {}
 
     verifyQRcodeScanned(request: VerifyQRCodeRequestData) {
-        return this.http.post(this.configUrl + `/verifyQRcodeScanned`, request);
+        let configUrl = this.getFullAPIurl();
+        return this.http.post(configUrl + `/verifyQRcodeScanned`, request);
     }
 
     getAllCities() {
-        return this.http.get<string[]>(this.configUrl  + '/getCitiesNamesForQRcodeConfiguration');
+        let configUrl = this.getFullAPIurl();
+        return this.http.get<string[]>(configUrl  + '/getCitiesNamesForQRcodeConfiguration');
     }
 
     getAllLocations(cityName: string | null) {
-        return this.http.get<string[]>(this.configUrl + `/getLocationsIdentifyersForQRcodeConfiguration/${cityName}`);
+        let configUrl = this.getFullAPIurl();
+        return this.http.get<string[]>(configUrl + `/getLocationsIdentifyersForQRcodeConfiguration/${cityName}`);
+    }
+
+    getFullAPIurl(): string {
+        return this.appComponentService.getAPIurl(UrlTargetTypes.QRCODE);
     }
 }
