@@ -1,0 +1,36 @@
+$logo-width: 100px;
+$logo-height: 69px;
+
+#header-container {
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+#system-logo {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    margin-left: 8vh;
+}
+
+#system-logo img {
+    width: $logo-width;
+    height: $logo-height;
+}
+
+#account-panel {
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    margin-right: 8vh;
+}
+
+#header-container ul li:hover {
+    cursor: pointer;
+}
+
+h4 {
+    align-self: center;
+}

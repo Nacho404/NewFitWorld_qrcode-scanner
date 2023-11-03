@@ -1,4 +1,3 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { AppComponent } from './app.component';
@@ -18,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { NotAuthGuardService } from './services/not-auth-guard.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 
 @NgModule({
@@ -46,7 +46,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     MatSnackBarModule
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }, AuthGuardService, NotAuthGuardService],
   bootstrap: [AppComponent],
 })
