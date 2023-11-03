@@ -4,7 +4,6 @@ import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
 import { Subscription } from 'rxjs';
 import { VerifyQRCodeScope, VerifyQRCodeRequestData } from 'src/app/models/qrcode.model';
 import { QRcodeService } from 'src/app/services/qrcode.service';
-import { ResponseService } from 'src/app/services/response.service';
 import { InformationMessageDialog } from '../informational-message-dialog/informational-message-dialog';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -34,7 +33,6 @@ export class QrCodeComponent implements OnInit{
 
   constructor (private qrcodeService: QRcodeService, 
     private dialog: MatDialog, 
-    private responseService: ResponseService,
     private tokenService: TokenService) {}
 
   ngOnInit(): void {
@@ -87,9 +85,8 @@ export class QrCodeComponent implements OnInit{
             this.resetBooleansDeclared();
           })
         },
-        error: (err) => {
-          const errorDisplayed = this.responseService.manageErrorResponse(err);
-          const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: errorDisplayed, isSuccesfull: false}});
+        error: (err: string) => {
+          const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: err, isSuccesfull: false}});
 
           infoDialog.afterClosed().subscribe(() => {
             this.resetBooleansDeclared();
