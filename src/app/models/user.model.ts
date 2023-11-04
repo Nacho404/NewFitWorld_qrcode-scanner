@@ -8,7 +8,8 @@ export interface UserDataToken {
 
 export interface AccountCredetialsModel {
     email: string,
-    password: string 
+    password: string,
+    scope: string
 }
 
 export interface SignInRequestResponse
@@ -25,4 +26,9 @@ export interface LogOutRequestResponse
     failed: boolean,
     errorMessage: string,
     successMessage: string
+}
+
+export enum SignInRequestScope {
+    QRcodeApplication = 'QRcodeApplication',
+    FitnessCenterApplication = 'FitnessCenterApplication'
 }

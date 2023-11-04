@@ -6,18 +6,17 @@ $buttonBorderColor: #e4e5e7;
 
 .informational-message-dialog {
     padding: 20px;
-    width: 400px;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 700px;
+    max-height: 90vh;
 }
 
 h4 {
     text-align: center;
     margin: 30px;
-    margin-top: 10px;
-    font-size: 2rem;
+    margin-top: 10px
 }
 
 button {
@@ -33,12 +32,11 @@ button {
 
 button:hover {
     border: 2px solid gray;
-    cursor: pointer;
 }
 
 .informational-message-dialog mat-icon {
     width: 70px;
     height: 80px;
-    font-size: 5rem;
+    font-size: 4rem;
     padding: 10px;
 }

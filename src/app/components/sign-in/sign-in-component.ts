@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { TokenService } from "src/app/services/token.service";
 import { UserService } from "src/app/services/user.service";
 import { InformationMessageDialog } from "../informational-message-dialog/informational-message-dialog";
-import { AccountCredetialsModel, SignInRequestResponse } from "src/app/models/user.model";
+import { AccountCredetialsModel, SignInRequestResponse, SignInRequestScope } from "src/app/models/user.model";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -46,7 +46,8 @@ export class SignInComponent implements OnInit {
     this.requestIsInProgress = true;
     const userCredentials: AccountCredetialsModel = {
       email: event.target.email.value,
-      password: event.target.password.value
+      password: event.target.password.value,
+      scope: SignInRequestScope.QRcodeApplication
     }
 
     this.userService.signIn(userCredentials).subscribe({
