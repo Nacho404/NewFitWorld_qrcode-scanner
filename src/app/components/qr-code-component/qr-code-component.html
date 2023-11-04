@@ -1,5 +1,6 @@
 <header></header>
-<div id="qrcode-container">
+<div id="qrcode-container" [ngClass]="requestIsInProgress? 'request-is-in-progress' : 'request-is-not-in-progress'">
+  <mat-progress-bar mode="indeterminate" *ngIf="requestIsInProgress"></mat-progress-bar>
   <div *ngIf="!anOptionIsSelected" style="text-align: center;">
     <h2>Locația: {{locationIdentifyer}}</h2>
   </div>
@@ -11,7 +12,7 @@
   
   <div *ngIf="anOptionIsSelected" id="camera-header">
     <h2>Mod: {{headerText}}</h2>
-    <button class="back-btn" (click)="backToMenu()">Înapoi la meniu</button>
+    <button class="back-btn" (click)="backToMenu()" [disabled]="requestIsInProgress? true : false">Înapoi la meniu</button>
   </div>
   
   <div id="qrcode-scanner" [style]="anOptionIsSelected? 'display: flex' : 'display: none'">
@@ -21,7 +22,7 @@
     <h1 class="camera-loading" *ngIf="action.isLoading"><mat-icon>hourglass_empty</mat-icon> Se încarcă...</h1>
   
     <!-- toggleCamera -->
-    <button *ngIf="!action.isLoading" class="btn" [class.btn-info]="!action.isStart" [class.btn-warning]="action.isStart" [disabled]="action.isLoading">
+    <button *ngIf="!action.isLoading" class="btn" [class.btn-info]="!action.isStart" [class.btn-warning]="action.isStart" [disabled]="action.isLoading" [disabled]="requestIsInProgress? true : false">
       <img *ngIf="!action.isStart" (click)="handle(action, 'start')" src="https://img.icons8.com/ios/50/000000/no-camera--v2.png" width="30px"/>
       <img *ngIf="action.isStart" (click)="handle(action, 'stop')" src="https://img.icons8.com/ios/50/000000/no-camera--v1.png" width="30px"/>
     </button>

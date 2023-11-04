@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
 import { Subscription } from 'rxjs';
-import { VerifyQRCodeScope, VerifyQRCodeRequestData } from 'src/app/models/qrcode.model';
+import { VerifyQRCodeScope, VerifyQRCodeRequestData, QRcodeRequestResponse } from 'src/app/models/qrcode.model';
 import { QRcodeService } from 'src/app/services/qrcode.service';
 import { InformationMessageDialog } from '../informational-message-dialog/informational-message-dialog';
 import { TokenService } from 'src/app/services/token.service';
@@ -13,6 +13,8 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./qr-code-component.scss']
 })
 export class QrCodeComponent implements OnInit{
+  requestIsInProgress: boolean = false;
+
   subscriptionRxjs: Subscription = new Subscription;
   @ViewChild("action", {static : true}) qrcodeComponent: NgxScannerQrcodeComponent | undefined;
   qrcodeData: any;
@@ -68,32 +70,36 @@ export class QrCodeComponent implements OnInit{
         verifyQRCodeScope: this.qrcodeRequestScope
       }
 
-      this.qrcodeService.verifyQRcodeScanned(requestData).subscribe({
-        next: () => {
-          let errorDisplayed = "";
-          if(this.qrcodeRequestScope == VerifyQRCodeScope.Entry){
-            errorDisplayed = "Cod QR scanat cu succes. Bine ai venit la NewFitWorld. Rămâi mereu în formă.";
+      this.requestIsInProgress = true;
+      setTimeout(() => {
+        this.qrcodeService.verifyQRcodeScanned(requestData).subscribe({
+        next: (res: QRcodeRequestResponse) => {
+
+          if (res.failed) {
+            const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: res.errorMessage, isSuccesfull: false}});
+            infoDialog.afterClosed().subscribe(() => {
+              this.resetBooleansDeclared();
+              this.requestIsInProgress = false;
+            });
+            return;
           }
 
-          if(this.qrcodeRequestScope == VerifyQRCodeScope.Exit){
-            errorDisplayed = "Cod QR scanat cu succes. Îți mulțumim că ai ales să te antrenezi alături de noi.";
-          }
-
-          const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: errorDisplayed, isSuccesfull: true}});
-
+          const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: res.successMessage, isSuccesfull: true}});
           infoDialog.afterClosed().subscribe(() => {
             this.resetBooleansDeclared();
-          })
+            this.requestIsInProgress = false;
+          });
         },
         error: (err: string) => {
           const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: err, isSuccesfull: false}});
-
           infoDialog.afterClosed().subscribe(() => {
             this.resetBooleansDeclared();
-          })
+            this.requestIsInProgress = false;
+          });
         }
       })
-      this.resetBooleansDeclared();
+      }, 5000);
+      // this.resetBooleansDeclared();
     }
     
     // This approach is used for preventing an Infinite loop of scanning the QRcode

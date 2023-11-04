@@ -8,3 +8,9 @@ export enum VerifyQRCodeScope {
     Entry = 'Entry',
     Exit = 'Exit'
 }
+
+export interface QRcodeRequestResponse {
+    failed: boolean,
+    errorMessage: string,
+    successMessage: string
+}

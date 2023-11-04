@@ -93,3 +93,14 @@ mat-icon {
     margin-top: 3vh;
     padding: 3vh;
 }
+
+.request-is-in-progress {
+    background-color: lightgray !important;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+.request-is-not-in-progress {
+    background-color: white;
+    border-radius: 0.6rem;
+}
