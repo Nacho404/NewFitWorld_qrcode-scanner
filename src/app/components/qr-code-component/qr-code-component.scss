@@ -94,13 +94,18 @@ mat-icon {
     height: 85vh;
     background-color: white;
     margin: auto;
-    margin-top: 3vh;
 }
 
 ::ng-deep video {
     max-height: 60vh;
     width: 100vw;
     object-fit: contain;
+}
+
+.info-scanner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .request-is-in-progress {

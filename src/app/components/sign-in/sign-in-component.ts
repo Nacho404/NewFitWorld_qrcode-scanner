@@ -67,7 +67,7 @@ export class SignInComponent implements OnInit {
         this.tokenService.updateTokenFromStore(res.token.value);
         this.tokenService.updateUserIdFromStore(res.token.userId);
         this.tokenService.updateLocationIdentifyerFromStore(res.locationIdentifyer);
-        this.router.navigate(['/']);
+        this.router.navigate(['/qrcode-customermode']);
         this.requestIsInProgress = false;
       },
       error: (err: string) => {

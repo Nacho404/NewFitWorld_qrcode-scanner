@@ -14,3 +14,8 @@ export interface QRcodeRequestResponse {
     errorMessage: string,
     successMessage: string
 }
+
+export enum QRcodeURLending {
+    QRcodeCustomerMode = '/qrcode-customermode',
+    QRcodeUserMode = '/qrcode-usermode'
+}

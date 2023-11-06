@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
 import { Subscription } from 'rxjs';
-import { VerifyQRCodeScope, VerifyQRCodeRequestData, QRcodeRequestResponse } from 'src/app/models/qrcode.model';
+import { VerifyQRCodeScope, VerifyQRCodeRequestData, QRcodeRequestResponse, QRcodeURLending } from 'src/app/models/qrcode.model';
 import { QRcodeService } from 'src/app/services/qrcode.service';
 import { InformationMessageDialog } from '../informational-message-dialog/informational-message-dialog';
 import { TokenService } from 'src/app/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'qr-code-component',
@@ -32,13 +33,23 @@ export class QrCodeComponent implements OnInit{
   citiesList: string[] = [];
 
   qrcodeRequestScope: VerifyQRCodeScope = VerifyQRCodeScope.Entry;
+  currentURLending = '';
+  isCustomerMode = false;
 
   constructor (private qrcodeService: QRcodeService, 
     private dialog: MatDialog, 
-    private tokenService: TokenService) {}
+    private tokenService: TokenService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.locationIdentifyer = this.tokenService.getLocationIdentifyerFromStore();
+    this.currentURLending = this.router.url;
+
+    if(this.currentURLending == QRcodeURLending.QRcodeCustomerMode) {
+      this.isCustomerMode = true;
+    } else {
+      this.isCustomerMode = false;
+    }
   }
 
   onDataChange(event: any) {

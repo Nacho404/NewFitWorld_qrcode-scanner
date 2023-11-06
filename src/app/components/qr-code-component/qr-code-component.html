@@ -1,10 +1,16 @@
-<header></header>
+<header *ngIf="!this.isCustomerMode"></header>
 <div id="qrcode-component" [ngClass]="requestIsInProgress? 'request-is-in-progress' : 'request-is-not-in-progress'">
   <mat-progress-bar mode="indeterminate" *ngIf="requestIsInProgress"></mat-progress-bar>
   <section id="qrcode-container">
-    <div *ngIf="!anOptionIsSelected" style="text-align: center;">
-      <h2>Locația: {{locationIdentifyer}}</h2>
-    </div>
+
+    <section class="info-scanner" *ngIf="!anOptionIsSelected">
+      <img src="././././assets/images/system-logo.jpeg" alt="Logo" style="width: 10vh;">
+
+      <div style="text-align: center;">
+        <h2>Locația: {{locationIdentifyer}}</h2>
+      </div>
+    </section>
+
     
     <div id="buttons-options" *ngIf="!anOptionIsSelected">
       <button class="entry-fitness-center" (click)="onEntryClick()">INTRARE</button>
@@ -15,6 +21,7 @@
       <h2>Mod: {{headerText}}</h2>
       <button class="back-btn" (click)="backToMenu()" [disabled]="requestIsInProgress? true : false">Înapoi la meniu</button>
     </div>
+
     
     <div id="qrcode-scanner" [style]="anOptionIsSelected? 'display: flex' : 'display: none'">
       <ngx-scanner-qrcode #action="scanner" (event)="onDataChange($event)"></ngx-scanner-qrcode>

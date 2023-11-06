@@ -10,7 +10,7 @@ export class  AuthGuardService implements CanActivate {
 
     canActivate(): boolean {
         if(this.tokenService.userIsLoggedIn()){
-            this.router.navigate(['/', 'qrcode']);
+            this.router.navigate(['/', 'qrcode-customermode']);
 
             this._snackBar.open("Ești deja autentificat în cont.",  '', 
             {

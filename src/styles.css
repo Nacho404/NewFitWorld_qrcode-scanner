@@ -13,3 +13,9 @@ body {
     background-color: gray;
     height: 99vh;
 }
+
+qr-code-component {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
