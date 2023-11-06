@@ -84,6 +84,10 @@ mat-icon {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin: 3vh;
+}
+
+#qrcode-component {
     border-radius: $buttonBorderRadius;
     border: 2px solid $buttonBorderColor;
     width: 90vh;
@@ -91,7 +95,12 @@ mat-icon {
     background-color: white;
     margin: auto;
     margin-top: 3vh;
-    padding: 3vh;
+}
+
+::ng-deep video {
+    max-height: 60vh;
+    width: 100vw;
+    object-fit: contain;
 }
 
 .request-is-in-progress {

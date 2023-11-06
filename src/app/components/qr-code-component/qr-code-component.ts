@@ -71,35 +71,33 @@ export class QrCodeComponent implements OnInit{
       }
 
       this.requestIsInProgress = true;
-      setTimeout(() => {
-        this.qrcodeService.verifyQRcodeScanned(requestData).subscribe({
-        next: (res: QRcodeRequestResponse) => {
+      this.qrcodeService.verifyQRcodeScanned(requestData).subscribe({
+      next: (res: QRcodeRequestResponse) => {
 
-          if (res.failed) {
-            const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: res.errorMessage, isSuccesfull: false}});
-            infoDialog.afterClosed().subscribe(() => {
-              this.resetBooleansDeclared();
-              this.requestIsInProgress = false;
-            });
-            return;
-          }
-
-          const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: res.successMessage, isSuccesfull: true}});
+        if (res.failed) {
+          const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: res.errorMessage, isSuccesfull: false}});
           infoDialog.afterClosed().subscribe(() => {
             this.resetBooleansDeclared();
             this.requestIsInProgress = false;
           });
-        },
-        error: (err: string) => {
-          const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: err, isSuccesfull: false}});
-          infoDialog.afterClosed().subscribe(() => {
-            this.resetBooleansDeclared();
-            this.requestIsInProgress = false;
-          });
+          return;
         }
+
+        const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: res.successMessage, isSuccesfull: true}});
+        infoDialog.afterClosed().subscribe(() => {
+          this.resetBooleansDeclared();
+          this.requestIsInProgress = false;
+        });
+      },
+      error: (err: string) => {
+        const infoDialog = this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: err, isSuccesfull: false}});
+        infoDialog.afterClosed().subscribe(() => {
+          this.resetBooleansDeclared();
+          this.requestIsInProgress = false;
+        });
+      }
       })
-      }, 5000);
-      // this.resetBooleansDeclared();
+      this.resetBooleansDeclared();
     }
     
     // This approach is used for preventing an Infinite loop of scanning the QRcode
