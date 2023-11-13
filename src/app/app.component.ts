@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private tokenService: TokenService){}
 
   ngOnInit(): void {
-    // enableProdMode();
+    enableProdMode();
     this.setUserIsLoggedIn()
     this.tokenService.subject.subscribe(() => this.setUserIsLoggedIn());
   }

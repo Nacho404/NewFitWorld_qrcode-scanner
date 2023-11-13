@@ -19,12 +19,7 @@ export class UserService {
         let configUrl = this.getFullAPIurl();
         return this.http.post<LogOutRequestResponse>(configUrl + '/logout' + `/${id}`, []);
     }
-
-    // getDataFromUser(userId: string) {
-    //     let configUrl = this.getFullAPIurl();
-    //     return this.http.get<GetDataFromUserRequestResponse>(configUrl + `/getDataFromUser/${userId}`);
-    // }
-
+    
     getFullAPIurl(): string {
         return this.appComponentService.getAPIurl(UrlTargetTypes.USER);
     }
