@@ -37,6 +37,7 @@ button img {
 #qrcode-scanner {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     margin-top: 20px;
 }
 
@@ -117,4 +118,86 @@ mat-icon {
 .request-is-not-in-progress {
     background-color: white;
     border-radius: 0.6rem;
+}
+
+.system-logo-img {
+    width: 10vh;
+}
+
+// Responsive style
+@media (max-width: 500px) { 
+    #qrcode-component {
+        width: 90%;
+        height: 55vh;
+        margin: auto;
+        margin-top: 5vh;
+    }
+
+    .entry-fitness-center, .exit-fitness-center {
+        font-weight: bold;
+        font-size: 1.25rem;
+        width: 80%;
+        height: 12vh;
+        margin: 4vh;
+    }
+
+    .system-logo-img {
+        width: 6vh;
+    }
+
+    .back-btn {
+        font-size: 0.6rem;
+        width: 20vh;
+    }
+
+    .location-name {
+        font-size: smaller;
+    }
+
+    #camera-header h2 {
+        font-size: 1.5vh;
+    }
+
+    #qrcode-scanner button img {
+        width: 30px;
+    }
+
+    #qrcode-scanner {
+        height: 40vh;
+    }
+
+    .camera-loading {
+        font-size: 1.2rem;
+    }
+    
+}
+
+@media (min-width: 501px) and (max-width: 700px) {
+    #sign-in-formular {
+        margin: 5vh;
+        height: 70vh;
+    }
+
+    #sign-in-formular .formular {
+        width: 60vh;
+        height: 100%;
+    }
+    #sign-in-formular .formular button {
+        margin-top: 15vh;
+    }
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+    #sign-in-formular {
+        margin: 8vh;
+        height: 70vh;
+    }
+
+    #sign-in-formular .formular {
+        width: 85vh;
+        height: 100%;
+    }
+    #sign-in-formular .formular button {
+        margin-top: 15vh;
+    }
 }

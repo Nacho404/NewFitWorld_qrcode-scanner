@@ -35,3 +35,18 @@ $logo-height: 69px;
 h4 {
     align-self: center;
 }
+
+// Responsive style
+@media (max-width: 500px) { 
+    #system-logo {
+        display: none;
+    }
+
+    #header-container {
+        justify-content: center;
+    }
+
+    #account-panel {
+        margin-right: 0;
+    }
+}

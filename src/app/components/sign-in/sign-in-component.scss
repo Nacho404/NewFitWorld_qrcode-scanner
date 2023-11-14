@@ -61,3 +61,53 @@ $buttonBorderColor: #e4e5e7;
     background-color: white;
     border-radius: 0.6rem;
 }
+
+mat-form-field {
+    margin-bottom: 2vh;
+}
+
+// Responsive style
+@media (max-width: 500px) { 
+    #sign-in-formular {
+        margin: 3vh;
+        height: 70vh;
+    }
+
+    #sign-in-formular .formular {
+        width: 45vh;
+        height: 100%;
+    }
+    #sign-in-formular .formular button {
+        margin-top: 15vh;
+    }
+}
+
+@media (min-width: 501px) and (max-width: 700px) {
+    #sign-in-formular {
+        margin: 5vh;
+        height: 70vh;
+    }
+
+    #sign-in-formular .formular {
+        width: 60vh;
+        height: 100%;
+    }
+    #sign-in-formular .formular button {
+        margin-top: 15vh;
+    }
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+    #sign-in-formular {
+        margin: 8vh;
+        height: 70vh;
+    }
+
+    #sign-in-formular .formular {
+        width: 85vh;
+        height: 100%;
+    }
+    #sign-in-formular .formular button {
+        margin-top: 15vh;
+    }
+}
