@@ -33,7 +33,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      // { path: '', component: QrCodeComponent, canActivate: [NotAuthGuardService] },
+      { path: '', component: QrCodeComponent, canActivate: [NotAuthGuardService] },
       { path: 'qrcode-usermode', component: QrCodeComponent, canActivate: [NotAuthGuardService] },
       { path: 'qrcode-customermode', component: QrCodeComponent, canActivate: [NotAuthGuardService] },
       { path: 'signin', component: SignInComponent, canActivate: [AuthGuardService] }

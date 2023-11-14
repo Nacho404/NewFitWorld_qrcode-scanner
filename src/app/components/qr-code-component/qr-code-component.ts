@@ -44,6 +44,10 @@ export class QrCodeComponent implements OnInit{
   ngOnInit(): void {
     this.locationIdentifyer = this.tokenService.getLocationIdentifyerFromStore();
     this.currentURLending = this.router.url;
+    
+    if(this.currentURLending == '/') {
+      this.router.navigate(['/', 'qrcode-customermode']);
+    }
 
     if(this.currentURLending == QRcodeURLending.QRcodeCustomerMode) {
       this.isCustomerMode = true;
