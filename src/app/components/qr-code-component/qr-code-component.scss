@@ -39,6 +39,7 @@ button img {
     flex-direction: column;
     justify-content: space-evenly;
     margin-top: 20px;
+    height: 75vh;
 }
 
 .camera-loading {
@@ -94,11 +95,11 @@ mat-icon {
     height: 85vh;
     background-color: white;
     margin: auto;
+    margin-top: 3vh;
 }
 
 ::ng-deep video {
-    max-height: 60vh;
-    width: 100vw;
+    width: 1000px !important;
     object-fit: contain;
 }
 
@@ -128,7 +129,7 @@ ngx-scanner-qrcode {
 }
 
 // Responsive style
-@media (max-width: 500px) { 
+@media (max-width: 499px) { 
     #qrcode-component {
         width: 90%;
         height: 85vh;
@@ -194,32 +195,179 @@ ngx-scanner-qrcode {
     }
 }
 
-@media (min-width: 501px) and (max-width: 700px) {
-    #sign-in-formular {
-        margin: 5vh;
+@media (min-width: 500px) and (max-width: 699px) {
+    #qrcode-component {
+        width: 90%;
+        height: 70vh;
+        margin: auto;
+        margin-top: 5vh;
+    }
+
+    .entry-fitness-center, .exit-fitness-center {
+        font-weight: bold;
+        font-size: 2rem;
+        width: 80%;
+        height: 12vh;
+        margin: 4vh;
+    }
+
+    .system-logo-img {
+        width: 9vh;
+    }
+
+    .back-btn {
+        font-size: 1.3rem;
+        width: 30vh;
+    }
+
+    .location-name {
+        font-size: x-larger;
+    }
+
+    #camera-header h2 {
+        font-size: 2.5vh;
+    }
+
+    #camera-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #qrcode-scanner button img {
+        width: 40px;
+    }
+
+    #qrcode-scanner {
+        height: 70vh;
+        margin-top: 0;
+    }
+
+    .camera-loading {
+        font-size: 1.2rem;
+    }
+
+    #qrcode-container {
+        height: inherit;
+    }
+
+    #buttons-options {
         height: 70vh;
     }
 
-    #sign-in-formular .formular {
-        width: 60vh;
-        height: 100%;
-    }
-    #sign-in-formular .formular button {
-        margin-top: 15vh;
+    ::ng-deep video {
+        width: 420px !important;
+        height: 375px !important;
     }
 }
 
-@media (min-width: 701px) and (max-width: 900px) {
-    #sign-in-formular {
-        margin: 8vh;
+@media (min-width: 700px) and (max-width: 899px) {
+    #qrcode-component {
+        width: 90%;
+        height: 70vh;
+        margin: auto;
+        margin-top: 5vh;
+    }
+
+    .entry-fitness-center, .exit-fitness-center {
+        font-weight: bold;
+        width: 80%;
+        height: 12vh;
+        margin: 4vh;
+    }
+
+    .back-btn {
+        width: 40vh;
+    }
+
+    #camera-header h2 {
+        font-size: 2.5vh;
+    }
+
+    #camera-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #qrcode-scanner button img {
+        width: 55px;
+    }
+
+    #qrcode-scanner {
+        height: 70vh;
+        margin-top: 0;
+    }
+
+    .camera-loading {
+        font-size: 1.2rem;
+    }
+
+    #qrcode-container {
+        height: inherit;
+        padding-bottom: 1.5vh;
+    }
+
+    #buttons-options {
         height: 70vh;
     }
 
-    #sign-in-formular .formular {
-        width: 85vh;
-        height: 100%;
+    ::ng-deep video {
+        width: 580px !important;
+        height: 435px !important;
     }
-    #sign-in-formular .formular button {
-        margin-top: 15vh;
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+    #qrcode-component {
+        width: 90%;
+        height: 90vh;
+        margin: auto;
+        margin-top: 5vh;
+    }
+
+    .entry-fitness-center, .exit-fitness-center {
+        font-weight: bold;
+        width: 80%;
+        height: 12vh;
+        margin: 4vh;
+    }
+
+    .back-btn {
+        width: 40vh;
+    }
+
+    #camera-header h2 {
+        font-size: 2.5vh;
+    }
+
+    #camera-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #qrcode-scanner button img {
+        width: 55px;
+    }
+
+    #qrcode-scanner {
+        height: 70vh;
+        margin-top: 0;
+    }
+
+    .camera-loading {
+        font-size: 1.2rem;
+    }
+
+    #qrcode-container {
+        height: inherit;
+        padding-bottom: 1.5vh;
+    }
+
+    #buttons-options {
+        height: 70vh;
+    }
+
+    ::ng-deep video {
+        width: 700px !important;
+        height: 525px !important;
     }
 }

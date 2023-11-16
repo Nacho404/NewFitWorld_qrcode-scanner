@@ -67,14 +67,14 @@ mat-form-field {
 }
 
 // Responsive style
-@media (max-width: 500px) { 
+@media (max-width: 499px) { 
     #sign-in-formular {
         margin: 3vh;
         height: 85vh;
     }
 
     #sign-in-formular .formular {
-        width: 45vh;
+        width: 90%;
         height: 100%;
     }
     #sign-in-formular .formular button {
@@ -82,32 +82,32 @@ mat-form-field {
     }
 }
 
-@media (min-width: 501px) and (max-width: 700px) {
+@media (min-width: 500px) and (max-width: 699px) {
     #sign-in-formular {
         margin: 5vh;
         height: 70vh;
     }
 
     #sign-in-formular .formular {
-        width: 60vh;
+        width: 90%;
         height: 100%;
     }
     #sign-in-formular .formular button {
-        margin-top: 15vh;
+        margin-top: 25vh;
     }
 }
 
-@media (min-width: 701px) and (max-width: 900px) {
+@media (min-width: 700px) and (max-width: 899px) {
     #sign-in-formular {
         margin: 8vh;
         height: 70vh;
     }
 
     #sign-in-formular .formular {
-        width: 85vh;
+        width: 90%;
         height: 100%;
     }
     #sign-in-formular .formular button {
-        margin-top: 15vh;
+        margin-top: 25vh;
     }
 }

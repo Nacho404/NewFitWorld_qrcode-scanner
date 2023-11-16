@@ -37,7 +37,7 @@ h4 {
 }
 
 // Responsive style
-@media (max-width: 500px) { 
+@media (max-width: 499px) { 
     #system-logo {
         display: none;
     }
@@ -48,5 +48,15 @@ h4 {
 
     #account-panel {
         margin-right: 0;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 699px) {
+    #system-logo {
+        margin-left: 2vh;
+    }
+
+    #account-panel {
+        margin-right: 2vh;
     }
 }
