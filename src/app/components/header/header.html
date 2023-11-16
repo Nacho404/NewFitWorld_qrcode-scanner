@@ -1,4 +1,4 @@
-<div id="header-container">
+<div id="header-container" [ngClass]="requestIsInProgress? 'request-is-in-progress' : 'request-is-not-in-progress'">
     <div id="system-logo">
         <img src="././././assets/images/system-logo.jpeg" alt="Logo">
     </div>
@@ -21,4 +21,7 @@
             </li>
         </ul>
     </div>
+</div>
+<div class="mat-progress-bar-container" *ngIf="requestIsInProgress">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>

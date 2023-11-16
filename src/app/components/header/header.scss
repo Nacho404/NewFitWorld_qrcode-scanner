@@ -36,6 +36,27 @@ h4 {
     align-self: center;
 }
 
+.mat-progress-bar-container {
+    background-color: white;
+    height: 5px;
+}
+
+.request-is-in-progress {
+    background-color: lightgray !important;
+    
+    #system-logo {
+        opacity: 0.1;;
+    }
+}
+
+.request-is-not-in-progress {
+    background-color: white;
+
+    #system-logo {
+        opacity: 1;;
+    }
+}
+
 // Responsive style
 @media (max-width: 499px) { 
     #system-logo {

@@ -16,6 +16,8 @@ import { LogOutRequestResponse, UserDataToken } from "src/app/models/user.model"
 })
   
 export class HeaderComponent implements OnInit {
+  requestIsInProgress: boolean = false;
+
   helper = new JwtHelperService();
   userIsLoggedIn = false;
   userId: string = '';
@@ -63,10 +65,12 @@ export class HeaderComponent implements OnInit {
   }
 
   signOut() {
+    this.requestIsInProgress = true;
     this.userService.logOut(this.userId).subscribe({
       next: (res: LogOutRequestResponse)=> {
         if(res.failed){
           this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: res.errorMessage}});
+          this.requestIsInProgress = false;
 
           return;
         }
@@ -82,9 +86,11 @@ export class HeaderComponent implements OnInit {
         this.tokenService.eraseLocationIdentifyerFromStore();
         this.router.navigate(['/', 'signin']);
         this.locationIdentifyer = null;
+        this.requestIsInProgress = false;
       },
       error: (err: string) => {
         this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: err}});
+        this.requestIsInProgress = false;
       }
     });
   }
