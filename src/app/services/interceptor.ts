@@ -34,18 +34,23 @@ export class Interceptor implements HttpInterceptor {
         } else {
             let errorsList = '';
 
-            const errorsObject = errorRecieved.error.errors;
-            for (const propertyName in errorsObject) {
-                if (errorsObject.hasOwnProperty(propertyName)) {
-                    const propertyValue = errorsObject[propertyName];
-                    for(const value of propertyValue) {
-                        errorsList += `*${value}*, `;
+            const errorsObject = errorRecieved.error?.errors;
+            if(errorsObject) {
+                for (const propertyName in errorsObject) {
+                    if (errorsObject.hasOwnProperty(propertyName)) {
+                        const propertyValue = errorsObject[propertyName];
+                        for(const value of propertyValue) {
+                            errorsList += `*${value}*, `;
+                        }
                     }
                 }
             }
+
+            if(errorsList == '') {
+                errorsList = '-';
+            }
             
-            errorMessage = `Error title: *${errorRecieved.error.title}*. Status code: *${errorRecieved.status}*. \n 
-                Errors: ${errorsList} `;
+            errorMessage = `Error title: *${errorRecieved.error.title}*. Status code: *${errorRecieved.status}*. Errors: ${errorsList} `;
         }
         return throwError(errorMessage);
     }
