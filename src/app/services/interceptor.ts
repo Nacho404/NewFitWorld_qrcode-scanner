@@ -26,13 +26,26 @@ export class Interceptor implements HttpInterceptor {
         );
     }
 
-    handleError(error: HttpErrorResponse){
+    handleError(errorRecieved: HttpErrorResponse){
         let errorMessage: string = '';
 
-        if (error.status === 0) {
-            errorMessage = `Conexiunea la server-ul aplicației nu a putut fi stabilită! Status eroare: ${error.status}`;
+        if (errorRecieved.status === 0) {
+            errorMessage = `Conexiunea la server-ul aplicației nu a putut fi stabilită! Status eroare: ${errorRecieved.status}`;
         } else {
-            errorMessage = error.message;
+            let errorsList = '';
+
+            const errorsObject = errorRecieved.error.errors;
+            for (const propertyName in errorsObject) {
+                if (errorsObject.hasOwnProperty(propertyName)) {
+                    const propertyValue = errorsObject[propertyName];
+                    for(const value of propertyValue) {
+                        errorsList += `*${value}*, `;
+                    }
+                }
+            }
+            
+            errorMessage = `Error title: *${errorRecieved.error.title}*. Status code: *${errorRecieved.status}*. \n 
+                Errors: ${errorsList} `;
         }
         return throwError(errorMessage);
     }
