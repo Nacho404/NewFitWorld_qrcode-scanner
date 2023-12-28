@@ -12,12 +12,12 @@ export class UserService {
 
     signIn(userCredetials: AccountCredetialsModel){
         let configUrl = this.getFullAPIurl();
-        return this.http.post<SignInRequestResponse>(configUrl + '/login', userCredetials);
+        return this.http.post<SignInRequestResponse>(configUrl + '/signIn', userCredetials);
     }
 
     logOut(id: string | undefined){
         let configUrl = this.getFullAPIurl();
-        return this.http.post<LogOutRequestResponse>(configUrl + '/logout' + `/${id}`, []);
+        return this.http.post<LogOutRequestResponse>(configUrl + '/signOut' + `/${id}`, []);
     }
     
     getFullAPIurl(): string {

@@ -73,15 +73,9 @@ export class QrCodeComponent implements OnInit{
 
       const qrcodeDataJSONformat = JSON.parse(this.qrcodeData);
 
-      if(qrcodeDataJSONformat?.locationIdentifyer != this.locationIdentifyer) {
-        const errorDisplayed = `QR-code-ul scanat aparține de locația ${qrcodeDataJSONformat?.locationIdentifyer}, iar locația în care vă aflați este ${this.locationIdentifyer}. Este perims accesul în sală doar cliențiilor înregistrați pe locația: ${this.locationIdentifyer}`
-        this.dialog.open(InformationMessageDialog, { disableClose: true, data: {message: errorDisplayed, isSuccesfull: false}});
-        return;
-      }
-
       const requestData: VerifyQRCodeRequestData = {
         customerId: qrcodeDataJSONformat?.customerId,
-        locationIdentifyer: qrcodeDataJSONformat?.locationIdentifyer,
+        locationIdentifyer: this.locationIdentifyer,
         verifyQRCodeScope: this.qrcodeRequestScope
       }
 
