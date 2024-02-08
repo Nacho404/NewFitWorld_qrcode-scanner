@@ -1,0 +1,6 @@
+#version {
+    position: absolute;
+    bottom: 1vh;
+    left: 1vh;
+    color: rgb(165, 165, 165)
+}

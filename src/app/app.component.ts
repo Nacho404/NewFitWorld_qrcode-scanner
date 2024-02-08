@@ -1,5 +1,6 @@
 import { Component, OnInit, enableProdMode } from '@angular/core';
 import { TokenService } from './services/token.service';
+import * as PackageJson from '../../package.json';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { TokenService } from './services/token.service';
 })
 export class AppComponent implements OnInit {
   userIsLoggedIn = false;
+  applicationVersion =  PackageJson?.version;
 
   constructor(private tokenService: TokenService){}
 

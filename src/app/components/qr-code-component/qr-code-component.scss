@@ -99,7 +99,7 @@ mat-icon {
 }
 
 ::ng-deep video {
-    width: 1000px !important;
+    width: 100% !important;
     object-fit: contain;
 }
 
@@ -132,7 +132,6 @@ ngx-scanner-qrcode {
 @media (max-width: 499px) { 
     #qrcode-component {
         width: 90%;
-        height: 85vh;
         margin: auto;
         margin-top: 5vh;
     }
@@ -198,7 +197,6 @@ ngx-scanner-qrcode {
 @media (min-width: 500px) and (max-width: 699px) {
     #qrcode-component {
         width: 90%;
-        height: 70vh;
         margin: auto;
         margin-top: 5vh;
     }
@@ -263,7 +261,6 @@ ngx-scanner-qrcode {
 @media (min-width: 700px) and (max-width: 899px) {
     #qrcode-component {
         width: 90%;
-        height: 70vh;
         margin: auto;
         margin-top: 5vh;
     }
@@ -319,7 +316,6 @@ ngx-scanner-qrcode {
 @media (min-width: 900px) and (max-width: 1200px) {
     #qrcode-component {
         width: 90%;
-        height: 90vh;
         margin: auto;
         margin-top: 5vh;
     }
